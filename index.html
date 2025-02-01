@@ -42,19 +42,17 @@
 
   <script>
     document.getElementById("completeChallenge").addEventListener("click", function() {
-      // The challenge token must be the base64-encoded string of "lootlabs_completed"
+      // The challenge token is the base64-encoded string of "lootlabs_completed"
       const challengeToken = btoa("lootlabs_completed");
       
-      // For demonstration, we use a dummy user ID "robloxUser123".
-      // In production, you might pass the real user ID via query parameters or another method.
+      // For demonstration, we use a dummy user ID "robloxUser123"
       const payload = {
         userId: "robloxUser123",
         challengeToken: challengeToken
       };
 
-      // The backend URL here is assumed to be served from the same domain.
-      // If your backend is hosted elsewhere, update the URL accordingly.
-      fetch("https://moonexeckey.netlify.app/generateKey", {
+      // Replace the URL below with your deployed backend’s URL.
+      fetch("https://your-backend-domain.com/generateKey", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
