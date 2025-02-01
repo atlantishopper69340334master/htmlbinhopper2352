@@ -1,81 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>LootLabs Challenge – Get Your Key</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-      background-color: #f2f2f2;
-    }
-    button {
-      padding: 12px 24px;
-      font-size: 18px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    #keyDisplay {
-      margin-top: 30px;
-      font-size: 20px;
-      color: green;
-    }
-    #errorDisplay {
-      margin-top: 30px;
-      font-size: 20px;
-      color: red;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Executor Key System</title>
 </head>
 <body>
-  <h1>LootLabs Challenge</h1>
-  <p>To get your key, please complete the challenge below.</p>
-  <!-- In a real challenge, you might include a captcha or puzzle here -->
-  <button id="completeChallenge">I Completed LootLabs</button>
-  
-  <div id="keyDisplay" style="display:none;">
-    Your key is: <span id="keyValue"></span><br>
-    (This key is valid for 50 hours.)
-  </div>
-  <div id="errorDisplay" style="display:none;"></div>
-
-  <script>
-    document.getElementById("completeChallenge").addEventListener("click", function() {
-      // The challenge token is the base64-encoded string of "lootlabs_completed"
-      const challengeToken = btoa("lootlabs_completed");
-      
-      // For demonstration, we use a dummy user ID "robloxUser123"
-      const payload = {
-        userId: "robloxUser123",
-        challengeToken: challengeToken
-      };
-
-      // Replace the URL below with your deployed backend’s URL.
-      fetch("https://your-backend-domain.com/generateKey", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if(data.success) {
-          document.getElementById("keyValue").textContent = data.key;
-          document.getElementById("keyDisplay").style.display = "block";
-          document.getElementById("errorDisplay").style.display = "none";
-        } else {
-          document.getElementById("errorDisplay").textContent = "Error: " + data.message;
-          document.getElementById("errorDisplay").style.display = "block";
-          document.getElementById("keyDisplay").style.display = "none";
+    <h1>Your Key:</h1>
+    <p id="key">Loading...</p>
+    <script>
+        async function getKey() {
+            let response = await fetch('https://raw.githubusercontent.com/atlantishopper69340334master/turbo-octo-potato6532/refs/heads/main/keys.json');
+            let data = await response.json();
+            document.getElementById('key').innerText = data.keys[data.keys.length - 1] || 'No key found';
         }
-      })
-      .catch(error => {
-        document.getElementById("errorDisplay").textContent = "Error: " + error;
-        document.getElementById("errorDisplay").style.display = "block";
-      });
-    });
-  </script>
+        getKey();
+    </script>
 </body>
 </html>
