@@ -31,9 +31,7 @@
 <body>
   <h1>LootLabs Challenge</h1>
   <p>To get your key, please complete the challenge below.</p>
-  
-  <!-- In a real implementation, your challenge might be more complex.
-       For now, a simple button click is used. -->
+  <!-- In a real challenge, you might include a captcha or puzzle here -->
   <button id="completeChallenge">I Completed LootLabs</button>
   
   <div id="keyDisplay" style="display:none;">
@@ -44,18 +42,19 @@
 
   <script>
     document.getElementById("completeChallenge").addEventListener("click", function() {
-      // The challenge token below is a base64-encoded string of "lootlabs_completed"
+      // The challenge token must be the base64-encoded string of "lootlabs_completed"
       const challengeToken = btoa("lootlabs_completed");
       
-      // In a real system, you might pass a user identifier via a query string or other means.
-      // Here, we use a dummy user ID.
+      // For demonstration, we use a dummy user ID "robloxUser123".
+      // In production, you might pass the real user ID via query parameters or another method.
       const payload = {
         userId: "robloxUser123",
         challengeToken: challengeToken
       };
 
-      fetch("https://your-backend-domain.com/generateKey", {  
-        // Replace "https://your-backend-domain.com" with your actual backend URL.
+      // The backend URL here is assumed to be served from the same domain.
+      // If your backend is hosted elsewhere, update the URL accordingly.
+      fetch("https://moonexeckey.netlify.app/generateKey", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
